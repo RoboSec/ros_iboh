@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <name>ros_rs_iboh</name>
+  <version>0.1.0</version>
+  <description>Metapackage for the RoboSec iBOH robot head</description>
+  <maintainer email="w.lucetti@robosec.eu">Walter "Myzhar" Lucetti</maintainer>
+  <license>LGPLv3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>iboh_sensors</run_depend>
+  <run_depend>iboh_description</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>
