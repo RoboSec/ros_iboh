@@ -48,14 +48,30 @@
   	</link>
   
 	
-    <!-- Add  ZED camera-->
+    <!-- ZED camera-->
+    <include filename="$(find zed_wrapper)/urdf/zed.urdf" />
+    <joint name="zed_joint" type="fixed">
+		<origin xyz="0.120 0.06 0.025"
+				rpy="0 0 0"/>
+		<parent link="chassis_link" />
+		<child link="ZED_left_camera" />
+	</joint>
 
-    <!-- Add joint for Sensor_left -->
+   	<!-- Right Ultrasonic Sensor -->
+    <xacro:hc-sr04 parent="chassis_link" name_suffix="right">
+		<origin xyz="0.121 -0.130 0.050" rpy="-${pi/2} 0 -0.2" />
+	</xacro:hc-sr04>
+	
     <!-- Center Ultrasonic Sensor -->
     <xacro:hc-sr04 parent="chassis_link" name_suffix="center">
 		<origin xyz="0.125 0 0.070" rpy="0 0 0" />
 	</xacro:hc-sr04>	
-    <!-- Add joint for Sensor_right -->
+    
+    <!-- Left Ultrasonic Sensor -->
+    <xacro:hc-sr04 parent="chassis_link" name_suffix="left">
+		<origin xyz="0.121 0.130 0.050" rpy="-${pi/2} 0 0.2" />
+	</xacro:hc-sr04>
+	
     <!-- Add joint for Sensor_rear -->
     <xacro:hc-sr04 parent="chassis_link" name_suffix="rear">
 		<origin xyz="-0.125 0 0.075" rpy="0 0 ${pi}" />

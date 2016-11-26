@@ -14,6 +14,7 @@
   <run_depend>std_msgs</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>rospy</run_depend>
+  <run_depend>zed_wrapper</run_depend>
 
   <!--URDF specific-->
   <run_depend>xacro</run_depend>
