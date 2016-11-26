@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Send the iBOH URDF/XACRO to param server -->
+  <param name="iboh_description" command="$(find xacro)/xacro '$(find iboh_description)/urdf/iboh.urdf.xacro'" />
+  
+  <!-- Activate node to propagate the joint state -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+  	<remap from="robot_description" to="iboh_description" />
+  </node>
+</launch>

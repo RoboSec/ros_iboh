@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot name="hc-sr04" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:macro name="hc-sr04" params="parent name_suffix *sensor_pose">
+
+		<!-- Included URDF/XACRO Files -->
+
+		<!-- Key Parameters -->
+		<property name="sensor_mass" value="20" /> <!-- TODO insert a correct weight for sensor -->    
+		<property name="sensor_length" value="0.205" />
+		<property name="sensor_width" value="0.451" />
+		<property name="sensor_height" value="0.152" />
+		
+		<!-- Root joint of HC-SR04 Sensor -->
+		<joint name="hc-sr04_joint_${name_suffix}" type="fixed"> 		
+			<parent link="${parent}"/>
+      		<child link="hc-sr04_link_${name_suffix}"/>      
+      		<xacro:insert_block name="sensor_pose"/>
+    	</joint>
+
+		<!-- Root link of hc-SR04 Sensor -->
+	    <link name="hc-sr04_link_${name_suffix}"> 
+			<inertial>
+				<mass value="${sensor_mass}"/>
+				<origin xyz="0 0 0"/>
+				<inertia ixx="1.0" ixy="0" ixz="0"
+					iyy="1.0" iyz="0" izz="1.0" />
+		    </inertial>	
+			<visual>				
+				<geometry>
+					<mesh filename="package://iboh_description/meshes/HC-SR04.stl"
+			     		scale="0.001 0.001 0.001" />
+				</geometry>
+				<origin xyz="0 0 0"
+						rpy="0 0 ${-pi/2}" />
+				<material name="Grey" />
+			</visual>
+			<collision>
+				<origin xyz="0 0 0"
+						rpy="0 0 0" />
+				<geometry>
+					<box size="${sensor_length} ${sensor_width} ${sensor_height}" />
+				</geometry>
+		    </collision>
+		</link>
+		
+		<joint name="trans_joint_${name_suffix}" type="fixed">
+			<origin xyz="0 0.0127 0"
+					rpy="0 0 0"/>
+			<parent link="hc-sr04_link_${name_suffix}" />
+			<child link="trans_link_${name_suffix}" />
+		</joint>
+		<link name="trans_link_${name_suffix}" />  
+		
+	   
+	    <joint name="receiv_joint_${name_suffix}" type="fixed">
+			<origin xyz="0 -0.0127 0"
+					rpy="0 0 0"/>
+			<parent link="hc-sr04_link_${name_suffix}" />
+			<child link="receiv_link_${name_suffix}" />
+		</joint>
+		<link name="receiv_link_${name_suffix}" />		
+
+   </xacro:macro>
+</robot>
